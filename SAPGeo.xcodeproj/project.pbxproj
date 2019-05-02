@@ -91,6 +91,7 @@
 		473E0F69022492B39A70F62D /* SAPGeoServiceFactory.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SAPGeoServiceFactory.swift; path = "Proxy Classes/internal/SAPGeoServiceFactory.swift"; sourceTree = "<group>"; };
 		4B0F4306227B2736001D9751 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		4B0F4308227B2D9A001D9751 /* SAPGeoLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SAPGeoLocation.swift; sourceTree = "<group>"; };
+		4B0F430B227B34D9001D9751 /* TestLocations.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TestLocations.gpx; sourceTree = "<group>"; };
 		4CECE41586E6C3FBFBB10DE0 /* GeoLocationTypeDetailViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GeoLocationTypeDetailViewController.swift; path = ViewControllers/GeoLocationType/GeoLocationTypeDetailViewController.swift; sourceTree = "<group>"; };
 		56B9637CEFF7390177A630DB /* GeoLocationTypeMasterViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GeoLocationTypeMasterViewController.swift; path = ViewControllers/GeoLocationType/GeoLocationTypeMasterViewController.swift; sourceTree = "<group>"; };
 		60DB7A004E649B8DE138026D /* OnboardingErrorHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OnboardingErrorHandler.swift; path = Onboarding/OnboardingErrorHandler.swift; sourceTree = "<group>"; };
@@ -170,6 +171,14 @@
 			name = "Proxy Classes";
 			sourceTree = "<group>";
 		};
+		4B0F430A227B34AA001D9751 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				4B0F430B227B34D9001D9751 /* TestLocations.gpx */,
+			);
+			path = Test;
+			sourceTree = "<group>";
+		};
 		6DEDF961996348156921C571 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -184,6 +193,7 @@
 			children = (
 				7A16F06C1FD1B3C700D2FABD /* README.md */,
 				7A1315B71D4B982000A5DA56 /* SAPGeo */,
+				4B0F430A227B34AA001D9751 /* Test */,
 				7A5744B421DE553600E58C7F /* UITests */,
 				7A1315B61D4B982000A5DA56 /* Products */,
 				7A1315CC1D4B990B00A5DA56 /* Frameworks */,
