@@ -48,7 +48,7 @@ class MapViewController: UIViewController {
             
             let locations = self.getArrayOfSAPGeoLocationsFromEntities(locations: geolocations)
             // Uncomment line below later in the tutorial
-            // self.storeLocationsToUserDefaults(locations: locations)
+            self.storeLocationsToUserDefaults(locations: locations)
             self.renderLocationsOnMap(locations: locations)
         }
     }
@@ -89,6 +89,21 @@ class MapViewController: UIViewController {
             // Uncomment line below later in the tutorial
             // registerGeofence(location: location)
         }
+    }
+    
+    /**
+     Add locations to `UserDefaults` for offline access
+     - Parameters:
+     - locations: Array of `SAPGeoLocation` entities
+     */
+    private func storeLocationsToUserDefaults(locations: [SAPGeoLocation]) {
+        var listSAPGeoLocations: [Data] = []
+        for item in locations {
+            let sapGeoLocation = NSKeyedArchiver.archivedData(withRootObject: item)
+            listSAPGeoLocations.append(sapGeoLocation)
+        }
+        
+        UserDefaults.standard.set(listSAPGeoLocations, forKey: "geofences")
     }
     
 }
