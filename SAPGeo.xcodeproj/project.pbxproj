@@ -14,6 +14,7 @@
 		1E6C67BB868148C75B803A02 /* OfflineODataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9768917E75C9128CA23C10B0 /* OfflineODataController.swift */; };
 		28DD3383062465B31F0DD393 /* OnboardingFlowProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0FF1A8EE52581F45E15319 /* OnboardingFlowProvider.swift */; };
 		4B0F4307227B2736001D9751 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0F4306227B2736001D9751 /* MapViewController.swift */; };
+		4B0F4309227B2D9A001D9751 /* SAPGeoLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0F4308227B2D9A001D9751 /* SAPGeoLocation.swift */; };
 		5D145A518F1A537CFB4138AC /* OnboardingErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DB7A004E649B8DE138026D /* OnboardingErrorHandler.swift */; };
 		6692F5C52BDE10A3BA17749A /* SAPGeoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D866F9F10CD9FD781056A22 /* SAPGeoService.swift */; };
 		6CEFCC49404F99485F75053F /* CollectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2BF8D914FE74719BE9B725 /* CollectionType.swift */; };
@@ -89,6 +90,7 @@
 		2AE07879CC67AC27364CFDC3 /* GeoLocationType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GeoLocationType.swift; path = "Proxy Classes/public/GeoLocationType.swift"; sourceTree = "<group>"; };
 		473E0F69022492B39A70F62D /* SAPGeoServiceFactory.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SAPGeoServiceFactory.swift; path = "Proxy Classes/internal/SAPGeoServiceFactory.swift"; sourceTree = "<group>"; };
 		4B0F4306227B2736001D9751 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		4B0F4308227B2D9A001D9751 /* SAPGeoLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SAPGeoLocation.swift; sourceTree = "<group>"; };
 		4CECE41586E6C3FBFBB10DE0 /* GeoLocationTypeDetailViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GeoLocationTypeDetailViewController.swift; path = ViewControllers/GeoLocationType/GeoLocationTypeDetailViewController.swift; sourceTree = "<group>"; };
 		56B9637CEFF7390177A630DB /* GeoLocationTypeMasterViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GeoLocationTypeMasterViewController.swift; path = ViewControllers/GeoLocationType/GeoLocationTypeMasterViewController.swift; sourceTree = "<group>"; };
 		60DB7A004E649B8DE138026D /* OnboardingErrorHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OnboardingErrorHandler.swift; path = Onboarding/OnboardingErrorHandler.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				7D2BF8D914FE74719BE9B725 /* CollectionType.swift */,
+				4B0F4308227B2D9A001D9751 /* SAPGeoLocation.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -450,6 +453,7 @@
 				98B512E32696E4A0A36B1780 /* SAPGeoServiceFactory.swift in Sources */,
 				7087BD26983688B55010C57C /* CollectionsViewController.swift in Sources */,
 				E04E8DC5D7EB7EF4358C0825 /* SAPGeoServiceStaticResolver.swift in Sources */,
+				4B0F4309227B2D9A001D9751 /* SAPGeoLocation.swift in Sources */,
 				E5866BF88B525A63123DA217 /* AlertHelper.swift in Sources */,
 				5D145A518F1A537CFB4138AC /* OnboardingErrorHandler.swift in Sources */,
 				A264845C2A79F58DB28CB1A2 /* LocalizedStrings.swift in Sources */,
