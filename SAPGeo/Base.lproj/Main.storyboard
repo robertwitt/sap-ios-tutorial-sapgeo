@@ -140,6 +140,14 @@
                             <constraint firstAttribute="trailing" secondItem="dOW-c3-suK" secondAttribute="trailing" id="s8G-Jt-Hfn"/>
                         </constraints>
                     </view>
+                    <toolbarItems>
+                        <barButtonItem title="Zoom to geofence" id="ede-3K-j6z">
+                            <connections>
+                                <action selector="zoomToGeofence:" destination="cTv-BT-ojt" id="Z9x-YZ-cFu"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="mapView" destination="dOW-c3-suK" id="5xG-BZ-j5D"/>
                     </connections>

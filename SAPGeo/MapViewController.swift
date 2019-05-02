@@ -52,7 +52,15 @@ class MapViewController: UIViewController {
             self.renderLocationsOnMap(locations: locations)
         }
     }
-
+    
+    @IBAction func zoomToGeofence(_ sender: Any) {
+        if mapView.selectedAnnotations.count > 0 {
+            let selected = mapView.selectedAnnotations[0]
+            let region = MKCoordinateRegion(center: selected.coordinate, latitudinalMeters: 250, longitudinalMeters: 250)
+            mapView.setRegion(region, animated: true)
+        }
+    }
+    
     /**
      Converts array of `GeoLocationType` objects to array of `SAPGeoLocation` objects, for convenience.
      - Parameters:
