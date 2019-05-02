@@ -11,10 +11,13 @@ import SAPFioriFlows
 import SAPFoundation
 import SAPOData
 import UserNotifications
+import CoreLocation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate, ConnectivityObserver, UNUserNotificationCenterDelegate {
+    
     var window: UIWindow?
+    let locationManager = CLLocationManager()
     /// Logger instance initialization
     private let logger = Logger.shared(named: "AppDelegateLogger")
     private var flowProvider = OnboardingFlowProvider()
@@ -41,6 +44,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         // Customize the UI to align SAP style
         // Read more: https://help.sap.com/doc/978e4f6c968c4cc5a30f9d324aa4b1d7/Latest/en-US/Documents/Frameworks/SAPFiori/Extensions/UINavigationBar.html
         UINavigationBar.applyFioriStyle()
+        
+        locationManager.delegate = self
+        locationManager.requestAlwaysAuthorization()
 
         return true
     }
@@ -77,6 +83,57 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
             return .allButUpsideDown
         }
     }
+    
+    /**
+     Processes the geofence event received from one of the `CLLocationManagerDelegate` delegate methods `locationManager(_:didEnterRegion:)` or `locationManager(_:didExitRegion:)`
+     If the app is running in the foreground, it will show an alert.
+     If the app is running in the background, it will show a local notification
+     - Parameters:
+     - region: The `CLRegion` instance which has been detected
+     - didEnter: `true` if the geofence has been entered, `false` if the geofence has been exited
+     */
+    func handleEvent(forRegion region: CLRegion!, didEnter: Bool) {
+        
+        let geoLocation = self.getGeoLocation(fromRegionIdentifier: region.identifier)
+        
+        if geoLocation != nil {
+            let message = geoLocation?.title ?? "Unknown title"
+            
+            logger.debug("\(didEnter ? "Entered" : "Exited") geofence: \(message)")
+            
+            if UIApplication.shared.applicationState == .active {
+                let view = window?.rootViewController
+                let alert = UIAlertController(title: "Geofence crossed", message: message, preferredStyle: .alert)
+                let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                alert.addAction(action)
+                view?.present(alert, animated: true, completion: nil)
+            } else {
+                let content = UNMutableNotificationContent()
+                content.title = "Geofence crossed"
+                content.body = message
+                content.sound = UNNotificationSound.default
+                
+                let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+                let request = UNNotificationRequest(identifier: "notification1", content: content, trigger: notificationTrigger)
+                
+                UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+            }
+        }
+    }
+    
+    /**
+     Retrieves an instance of `SAPGeoLocation` from the array stored in `UserDefaults` based on the `identifier` provided
+     - Parameters:
+     - identifier: The id of the geofence
+     - Returns: Instance of `SAPGeoLocation` or `nil` if the geofence could not be found
+     */
+    func getGeoLocation(fromRegionIdentifier identifier: String) -> SAPGeoLocation? {
+        let storedLocations = UserDefaults.standard.array(forKey: "geofences") as? [NSData]
+        let sapGeoLocations = storedLocations?.map { NSKeyedUnarchiver.unarchiveObject(with: $0 as Data) as? SAPGeoLocation }
+        let index = sapGeoLocations?.firstIndex { $0?.identifier == identifier }
+        return index != nil ? sapGeoLocations?[index!] : nil
+    }
+    
 }
 
 // Convenience accessor for the AppDelegate
@@ -258,6 +315,21 @@ extension AppDelegate {
                 return
             }
             self.logger.info("Logs have been uploaded successfully.")
+        }
+    }
+}
+
+extension AppDelegate: CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
+        if region is CLCircularRegion {
+            handleEvent(forRegion: region, didEnter: true)
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
+        if region is CLCircularRegion {
+            handleEvent(forRegion: region, didEnter: false)
         }
     }
 }
