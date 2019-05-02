@@ -87,7 +87,7 @@ class MapViewController: UIViewController {
             mapView.addOverlay(MKCircle(center: location.coordinate, radius: location.radius))
             
             // Uncomment line below later in the tutorial
-            // registerGeofence(location: location)
+            registerGeofence(location: location)
         }
     }
     
@@ -106,6 +106,30 @@ class MapViewController: UIViewController {
         UserDefaults.standard.set(listSAPGeoLocations, forKey: "geofences")
     }
     
+    /**
+     Registers a region to location manager and start monitoring for crossing the geofence
+     - Parameters:
+     - location: The `SAPGeoLocation` object which will be registered as a geofence
+     */
+    private func registerGeofence(location: SAPGeoLocation) {
+        let region = getRegionForLocation(location: location)
+        
+        locationManager.startMonitoring(for: region)
+    }
+    
+    /**
+     Returns a circular geofence region
+     - Parameters:
+     - location: The `SAPGeoLocation` object which will be used to define the geofence
+     - Returns: Instance of `CLCircularRegion`
+     */
+    private func getRegionForLocation(location: SAPGeoLocation) -> CLCircularRegion {
+        let region = CLCircularRegion(center: location.coordinate, radius: location.radius, identifier: location.identifier!)
+        region.notifyOnEntry = true
+        region.notifyOnExit = false
+        return region
+    }
+
 }
 
 // MARK: - Map View Delegate
