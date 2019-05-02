@@ -2,8 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>NSFaceIDUsageDescription</key>
-    <string>Please permit using Face ID.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>SAPGeo requires your location also when you are not using the app</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>SAPGeo requires your location in order to notify you when you enter a geofence</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Please permit using Face ID.</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>

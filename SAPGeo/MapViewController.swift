@@ -7,24 +7,57 @@
 //
 
 import UIKit
+import MapKit
+import CoreLocation
+import SAPCommon
 
 class MapViewController: UIViewController {
 
+    @IBOutlet weak var mapView: MKMapView!
+    
+    private var locationManager = CLLocationManager()
+    private let logger = Logger.shared(named: "MapViewControllerLogger")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        mapView.delegate = self
+        
+        locationManager.delegate = self
+        locationManager.requestAlwaysAuthorization()
+    }
+
+}
+
+// MARK: - Map View Delegate
+extension MapViewController: MKMapViewDelegate {
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        // TODO: Implement later!
+        return nil
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        // TODO: Implement later!
+        return MKOverlayRenderer(overlay: overlay)
     }
-    */
+    
+}
 
+// MARK: - Location Manager Delegate
+extension MapViewController: CLLocationManagerDelegate {
+    
+    // Allow access to your current location if the "always" authorization is set (see r:25)
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        mapView.showsUserLocation = status == .authorizedAlways
+    }
+    
+    func locationManager(_ manager: CLLocationManager, monitoringDidFailFor region: CLRegion?, withError error: Error) {
+        logger.error("Monitoring did fail for region: \(region!.identifier)")
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        logger.error("Location Manager did fail with error: \(error)")
+    }
+    
 }
